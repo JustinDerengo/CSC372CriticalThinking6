@@ -1,8 +1,6 @@
 package org.justinski;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import static org.justinski.MergeSort.mergeSort;
 
 public class Main {
@@ -21,13 +19,11 @@ public class Main {
         students.add(new Student(1, "Nikita", "6784 North St"));
         students.add(new Student(6, "Rick", "9352 South St"));
 
-        Student[] studentArray = students.toArray(new Student[0]);
-
         for (Student student : students) {
             System.out.println(student);
         }
 
-        MergeSort.mergeSort(students, 0, studentArray.length - 1, new StudentComparator());
+        mergeSort(students, 0, students.size() - 1, new StudentComparator());
         System.out.println();
         for (Student student : students) {
             System.out.println(student);

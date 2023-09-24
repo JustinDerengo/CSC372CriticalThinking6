@@ -2,7 +2,6 @@ package org.justinski;
 
 public class Student {
     private int rollno;
-    private static int nextRollno = 1;
     private String name;
     private String address;
 
@@ -10,10 +9,7 @@ public class Student {
         this.rollno = rollno;
         this.name = name;
         this.address = address;
-
     }
-
-
 
     public String getName() {
         return name;
@@ -43,5 +39,4 @@ public class Student {
                 ", Address:" + address +
                 '}';
     }
-
 }
