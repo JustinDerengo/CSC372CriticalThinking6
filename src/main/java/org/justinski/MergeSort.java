@@ -2,42 +2,54 @@ package org.justinski;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class MergeSort {
-    public static void mergeSort(List<Student> students, Comparator<Student> comparator) {
-        if (students.size() <= 1) {
-            return;
+    public static void mergeSort(ArrayList<Student> arr, int left, int right, Comparator<Student> comparator) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSort(arr, left, mid, comparator);
+            mergeSort(arr, mid + 1, right, comparator);
+            merge(arr, left, mid, right, comparator);
         }
-        int mid = students.size() / 2;
-        List<Student> left = new ArrayList<>(students.subList(0, mid));
-        List<Student> right = new ArrayList<>(students.subList(mid, students.size()));
-
-        mergeSort(left, comparator);
-        mergeSort(right, comparator);
-
-        merge(students,left,right,comparator);
     }
 
-    private static void merge(List<Student> students, List<Student> left, List<Student> right, Comparator<Student> comparator) {
-        int leftSize = left.size();
-        int rightSize = right.size();
-        int i = 0, j = 0, k = 0;
+    public static void merge(ArrayList<Student> arr, int left, int mid, int right, Comparator<Student> comparator) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
 
-        while (i < leftSize && j < rightSize) {
-            if (comparator.compare(left.get(i), right.get(j)) < 0) {
-                students.set(k++, right.get(i++));
+        Student[] leftArray = new Student[n1];
+        Student[] rightArray = new Student[n2];
+
+        for (int i = 0; i < n1; i++) {
+            leftArray[i] = arr.get(left + i);
+        }
+        for (int i = 0; i < n2; i++) {
+            rightArray[i] = arr.get(mid + 1 + i);
+        }
+
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            if (comparator.compare(leftArray[i], rightArray[j]) <= 0) {
+                arr.set(k, leftArray[i]);
+                i++;
             } else {
-                students.set(k++, right.get(j++));
+                arr.set(k, rightArray[j]);
+                j++;
             }
+            k++;
         }
 
-        while (i < leftSize) {
-            students.set(k++, left.get(i++));
+        while (i < n1) {
+            arr.set(k, leftArray[i]);
+            i++;
+            k++;
         }
 
-        while (j < leftSize) {
-            students.set(k++, right.get(j++));
+        while (j < n2) {
+            arr.set(k, rightArray[j]);
+            j++;
+            k++;
         }
     }
 }

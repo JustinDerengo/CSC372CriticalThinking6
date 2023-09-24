@@ -6,12 +6,14 @@ public class Student {
     private String name;
     private String address;
 
-    public Student(String name, String address) {
-        this.rollno = nextRollno;
+    public Student(int rollno, String name, String address) {
+        this.rollno = rollno;
         this.name = name;
         this.address = address;
-        nextRollno++;
+
     }
+
+
 
     public String getName() {
         return name;
@@ -35,10 +37,10 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "Roll no. : " + rollno +
-                ", Name: '" + name + '\'' +
-                ", Address: '" + address + '\'' +
+        return "Student{ " +
+                "Roll #:" + rollno +
+                ", Name:" + name  +
+                ", Address:" + address +
                 '}';
     }
 
